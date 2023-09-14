@@ -1,16 +1,23 @@
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-// import * as sqs from 'aws-cdk-lib/aws-sqs';
+import * as ddb from "aws-cdk-lib/aws-dynamodb"
 
 export class CdkBackendStackStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    // The code that defines your stack goes here
+    const dynamodbTable = new ddb.Table(this , "Table" ,{
+      partitionKey :{
+        name: 'id',
+        type: ddb.AttributeType.STRING
+      },
+    });
 
-    // example resource
-    // const queue = new sqs.Queue(this, 'CdkBackendStackQueue', {
-    //   visibilityTimeout: cdk.Duration.seconds(300)
-    // });
+    const dynamodbTable2 = new ddb.Table(this , "Table2" ,{
+      partitionKey :{
+        name: 'id',
+        type: ddb.AttributeType.STRING
+      },
+    });
   }
 }
